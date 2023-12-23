@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".applicationform.PersonalInfoFragment">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="25dp">
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_id"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/id"
+                android:textSize="20sp"
+                android:autofillHints="phone"
+                android:inputType="number"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_name"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_personal_info_et_id"
+                android:hint="@string/name"
+                android:textSize="20sp"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_surname"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/surname"
+                android:layout_below="@id/fragment_personal_info_et_name"
+                android:textSize="20sp"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_registration_province"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Nüfusa Kayıtlı Olduğu İl"
+                android:layout_below="@id/fragment_personal_info_et_surname"
+                android:textSize="20sp"
+                android:autofillHints=""
+                android:inputType=""
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_born_place"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Doğum Yeri"
+                android:layout_below="@id/fragment_personal_info_et_registration_province"
+                android:textSize="20sp"
+                android:autofillHints=""
+                android:inputType=""
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_birth_date"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Doğum Tarihi"
+                android:layout_below="@id/fragment_personal_info_et_born_place"
+                android:textSize="20sp"
+                android:autofillHints=""
+                android:inputType="datetime"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_mother_name"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Anne Adı"
+                android:layout_below="@id/fragment_personal_info_et_birth_date"
+                android:textSize="20sp"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_father_name"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Baba Adı"
+                android:layout_below="@id/fragment_personal_info_et_mother_name"
+                android:textSize="20sp"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_job"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Mesleği"
+                android:layout_below="@id/fragment_personal_info_et_father_name"
+                android:textSize="20sp"
+                android:autofillHints=""
+                android:inputType="text"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:id="@+id/fragment_personal_info_linear_layout_blood_type"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/fragment_personal_info_et_job"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fragment_personal_info_tv_blood_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kan Grubu"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/fragment_personal_info_linear_layout_blood_type_fields"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/fragment_personal_info_et_blood_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textSize="20sp"
+                        android:hint="Kan Grubu"
+                        android:autofillHints=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RH:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp" />
+
+                    <EditText
+                        android:id="@+id/fragment_personal_info_et_blood_type_rh"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:hint="RH"
+                        android:textSize="20sp"
+                        android:layout_marginStart="5dp"
+                        android:inputType="text"
+                        android:autofillHints="" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_ssk_no"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="SSK Sicil No"
+                android:layout_below="@id/fragment_personal_info_linear_layout_blood_type"
+                android:textSize="20sp"
+                android:autofillHints=""
+                android:inputType="text"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_email"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="E-Posta"
+                android:layout_below="@id/fragment_personal_info_et_ssk_no"
+                android:textSize="20sp"
+                android:autofillHints="emailAddress"
+                android:inputType="textEmailAddress"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_phone_number"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Cep Telefonu Numarası"
+                android:layout_below="@id/fragment_personal_info_et_email"
+                android:textSize="20sp"
+                android:autofillHints="phone"
+                android:inputType="phone"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_home_phone_number"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Ev Telefonu Numarası"
+                android:layout_below="@id/fragment_personal_info_et_phone_number"
+                android:textSize="20sp"
+                android:autofillHints="phone"
+                android:inputType="phone"
+                android:layout_centerHorizontal="true" />
+
+            <RelativeLayout
+                android:id="@+id/fragment_personal_info_relative_layout_child_info"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_personal_info_et_home_phone_number"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/fragment_personal_info_tv_children_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Çocuk Sayısı"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fragment_personal_info_tv_children_info"
+                    android:layout_marginStart="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Erkek"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/fragment_personal_info_et_son"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:autofillHints=""
+                        android:text="0"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kız"
+                        android:textSize="20sp"
+                        android:layout_marginStart="20dp"/>
+
+                    <EditText
+                        android:id="@+id/fragment_personal_info_et_daughter"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:inputType="numberDecimal"
+                        android:autofillHints="" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_personal_info_linear_layout_driving_licence"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_personal_info_relative_layout_child_info"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ehliyet:"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/fragment_personal_info_check_box_driving_licence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Var"
+                        android:layout_marginStart="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/fragment_personal_info_et_driving_licence_got_date"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Alınış Tarihi"
+                        android:inputType="date"
+                        android:autofillHints=""
+                        android:enabled="false"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/fragment_personal_info_et_driving_licence_class"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Sınıfı"
+                        android:autofillHints=""
+                        android:inputType="text"
+                        android:enabled="false"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/fragment_personal_info_et_living_address"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="İkametgah Adresi"
+                android:layout_below="@id/fragment_personal_info_linear_layout_driving_licence"
+                android:inputType="textMultiLine" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

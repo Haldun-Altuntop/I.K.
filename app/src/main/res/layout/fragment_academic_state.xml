@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".applicationform.AcademicStateFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:padding="25dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/fragment_academic_state_cb_primary_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="İlkokul" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_primary_school_start_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Başlama Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_primary_school_end_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bitiş Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_primary_school_name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Okulun Adı"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_primary_school_region"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Yeri"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/fragment_academic_state_cb_middle_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ortaokul" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_middle_school_start_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Başlama Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_middle_school_end_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bitiş Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_middle_school_name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Okulun Adı"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_middle_school_region"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Yeri"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/fragment_academic_state_cb_high_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lise" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_high_school_start_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Başlama Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_high_school_end_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bitiş Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_high_school_name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Okulun Adı"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_high_school_degree"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Derecesi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_high_school_branch"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bölümü"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_high_school_region"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Yeri"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/fragment_academic_state_cb_university"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Üniversite/Yüksekokul" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_university_start_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Başlama Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_university_end_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bitiş Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_university_name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Okulun Adı"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_university_degree"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Derecesi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_university_branch"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bölümü"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_university_region"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Yeri"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/fragment_academic_state_cb_master"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lisansüstü Çalışmalar" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_master_start_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Başlama Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_master_end_date"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bitiş Tarihi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_master_name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Okulun Adı"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_master_degree"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Derecesi"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_master_branch"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Bölümü"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <EditText
+                android:id="@+id/fragment_academic_state_et_master_region"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Yeri"
+                android:textSize="20sp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

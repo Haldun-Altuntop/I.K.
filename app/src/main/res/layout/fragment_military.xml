@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".applicationform.MilitaryFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp">
+
+        <LinearLayout
+            android:id="@+id/fragment_military_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aslerlik Durumu:"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/fragment_military_toggle_button_has_done"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textOn="Yaptı"
+                android:textOff="Yapmadı" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/fragment_military_et_entry_date"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_military_linear_layout"
+            android:layout_centerHorizontal="true"
+            android:hint="Giriş Tarihi"
+            android:textSize="20sp"
+            android:enabled="false"
+            android:inputType="date"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/fragment_military_et_discharge_date"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_military_et_entry_date"
+            android:layout_centerHorizontal="true"
+            android:hint="Terhis Tarihi"
+            android:textSize="20sp"
+            android:enabled="false"
+            android:inputType="date"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/fragment_military_et_duty_area"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_military_et_discharge_date"
+            android:layout_centerHorizontal="true"
+            android:hint="Görev Yeri"
+            android:textSize="20sp"
+            android:enabled="false"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/fragment_military_et_rank"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_military_et_duty_area"
+            android:layout_centerHorizontal="true"
+            android:hint="Rütbesi"
+            android:textSize="20sp"
+            android:enabled="false"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
+
+    </RelativeLayout>
+
+</ScrollView>
