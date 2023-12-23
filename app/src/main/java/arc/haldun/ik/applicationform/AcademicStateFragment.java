@@ -256,5 +256,7 @@ public class AcademicStateFragment extends Fragment {
         et_master_Region = view.findViewById(R.id.fragment_academic_state_et_master_region);
         et_master_Degree = view.findViewById(R.id.fragment_academic_state_et_master_degree);
         et_master_Branch = view.findViewById(R.id.fragment_academic_state_et_master_branch);
+
+        // TODO: set check box's on checked change listener
     }
 }

@@ -20,6 +20,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
     // Fragments
     private PersonalInfoFragment personalInfoFragment;
     private MilitaryFragment militaryFragment;
+    private AcademicStateFragment academicStateFragment;
 
     // Other components
     private Fragment[] fragments;
@@ -108,6 +109,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
         personalInfoFragment = new PersonalInfoFragment();
         militaryFragment = new MilitaryFragment();
+        academicStateFragment = new AcademicStateFragment();
     }
 
     private void  initViews() {
@@ -125,6 +127,6 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
     private void initOtherComponents() {
 
-        fragments = new Fragment[]{personalInfoFragment, militaryFragment};
+        fragments = new Fragment[]{personalInfoFragment, militaryFragment, academicStateFragment};
     }
 }
