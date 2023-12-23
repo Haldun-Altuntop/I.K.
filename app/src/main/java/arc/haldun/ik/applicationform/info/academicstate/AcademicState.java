@@ -12,6 +12,15 @@ public class AcademicState {
         this.primarySchool = primarySchool;
     }
 
+    public AcademicState(First primarySchool, First middleSchool, High highSchool, High university,
+                         High master) {
+        this.primarySchool = primarySchool;
+        this.middleSchool = middleSchool;
+        this.highSchool = highSchool;
+        this.university = university;
+        this.master = master;
+    }
+
     public First getPrimarySchool() {
         return primarySchool;
     }
