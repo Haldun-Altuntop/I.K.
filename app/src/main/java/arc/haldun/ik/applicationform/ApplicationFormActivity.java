@@ -1,14 +1,22 @@
 package arc.haldun.ik.applicationform;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import arc.haldun.ik.R;
+import arc.haldun.ik.applicationform.elements.Language;
+import arc.haldun.ik.applicationform.fragments.AcademicStateFragment;
+import arc.haldun.ik.applicationform.fragments.Fragment;
+import arc.haldun.ik.applicationform.fragments.LanguageFragment;
+import arc.haldun.ik.applicationform.fragments.MilitaryFragment;
+import arc.haldun.ik.applicationform.fragments.PersonalInfoFragment;
 import arc.haldun.ik.applicationform.info.MilitaryState;
+import arc.haldun.ik.applicationform.info.academicstate.AcademicState;
 import arc.haldun.ik.exceptions.MissingInformationException;
 import arc.haldun.ik.applicationform.info.PersonalInformation;
 
@@ -21,11 +29,12 @@ public class ApplicationFormActivity extends AppCompatActivity {
     private PersonalInfoFragment personalInfoFragment;
     private MilitaryFragment militaryFragment;
     private AcademicStateFragment academicStateFragment;
+    private LanguageFragment  languageFragment;
 
     // Other components
     private Fragment[] fragments;
 
-    private int currentFragment = 0;
+    private int currentFragmentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +51,32 @@ public class ApplicationFormActivity extends AppCompatActivity {
         initOtherComponents();
 
         // Set current fragment
-        setCurrentFragment(currentFragment);
+        setCurrentFragmentIndex(currentFragmentIndex);
+
+        // DEBUG
+        //setCurrentFragmentIndex(3);
+    }
+
+    private void showMissingInformationDialog(String... missingFields) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (String missingField : missingFields) {
+
+            // Give some space
+            stringBuilder.append("\n");
+
+            // Apply the string
+            stringBuilder.append(missingField);
+        }
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getCurrentFragment().requireContext());
+        dialogBuilder.setTitle("Eksik bilgiler var:\n")
+                .setMessage(stringBuilder)
+                .setPositiveButton("Tamam", null);
+
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
     }
 
     private void onShiftPageButtonsClicked(View view) {
@@ -50,53 +84,98 @@ public class ApplicationFormActivity extends AppCompatActivity {
         // On next button clicked
         if (view.equals(btnNext)) {
 
-            if (currentFragment == fragments.length - 1) {
+            try {
+                getCurrentFragment().collectInformationAsString();
+            } catch (MissingInformationException e) {
+                showMissingInformationDialog(e.getMissingFields());
+                return;
+            }
+
+            if (currentFragmentIndex == fragments.length - 1) {
                 return; // If fragment index is max value, do nothing
             }
 
             // Increase fragment index
-            currentFragment++;
+            currentFragmentIndex++;
 
         }
 
         // On previous button clicked
         if (view.equals(btnPrevious)) {
 
-            if (currentFragment == 0) {
+            if (currentFragmentIndex == 0) {
                 return; // If current fragment value is min value, do nothing
             }
 
             // Decrease fragment index
-            currentFragment--;
-
+            currentFragmentIndex--;
         }
 
         // Set active fragment to current fragment
-        setCurrentFragment(currentFragment);
+        setCurrentFragmentIndex(currentFragmentIndex);
 
         // Update forwarding buttons' activity
-        btnPrevious.setEnabled(currentFragment != 0);
-        btnNext.setEnabled(currentFragment != fragments.length - 1);
+        btnPrevious.setEnabled(currentFragmentIndex != 0);
+        btnNext.setEnabled(currentFragmentIndex != fragments.length - 1);
     }
 
     private void btnCommitClicked(View view) {
 
         try {
+
             PersonalInformation personalInformation = this.personalInfoFragment.getPersonalInfo();
             MilitaryState militaryState = this.militaryFragment.getMilitaryState();
+            AcademicState academicState = academicStateFragment.getAcademicState();
 
             System.out.println("Kişisel bilgileri:\n");
             System.out.println(personalInformation.toString());
 
             System.out.println("\nAskerlik durumu:\n");
             System.out.println(militaryState);
-        } catch (MissingInformationException e) {
-            throw new RuntimeException(e);
-        }
 
+            System.out.println("\nAkademik durumu:\n");
+            System.out.println(academicState.toString());
+
+            printLanguages();
+
+        } catch (MissingInformationException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            showMissingInformationDialog(e.getMessage());
+        } catch (Exception e) {
+
+            Toast.makeText(this, "Bilgiler gönderilemedi. Bilgileri eksiksiz " +
+                    "doldurduğuğunuzdan emin olun ve bağlantınızı kontrol edin.",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
-    private void setCurrentFragment(int index) {
+    private void showMissingInformationDialog(String msg) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Eksik bilgiler var")
+                .setMessage(msg)
+                .setPositiveButton("Tamam", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void printLanguages() {
+
+        Language[] languages = languageFragment.getLanguages();
+
+        System.out.println("\nYabancı dil:\n");
+
+        for (Language language : languages) {
+            System.out.println(language.toString());
+        }
+    }
+
+    private Fragment getCurrentFragment() {
+        return fragments[currentFragmentIndex];
+    }
+
+    private void setCurrentFragmentIndex(int index) {
 
         Fragment fragment = fragments[index];
 
@@ -110,6 +189,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         personalInfoFragment = new PersonalInfoFragment();
         militaryFragment = new MilitaryFragment();
         academicStateFragment = new AcademicStateFragment();
+        languageFragment = new LanguageFragment();
     }
 
     private void  initViews() {
@@ -127,6 +207,11 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
     private void initOtherComponents() {
 
-        fragments = new Fragment[]{personalInfoFragment, militaryFragment, academicStateFragment};
+        fragments = new Fragment[] {
+                personalInfoFragment,
+                militaryFragment,
+                academicStateFragment,
+                languageFragment
+        };
     }
 }

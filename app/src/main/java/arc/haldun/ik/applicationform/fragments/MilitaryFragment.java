@@ -1,8 +1,6 @@
-package arc.haldun.ik.applicationform;
+package arc.haldun.ik.applicationform.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,7 @@ import android.widget.ToggleButton;
 
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.info.MilitaryState;
+import arc.haldun.ik.exceptions.MissingInformationException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,7 +77,7 @@ public class MilitaryFragment extends Fragment {
         return view;
     }
 
-    public MilitaryState getMilitaryState() {
+    public MilitaryState getMilitaryState() throws MissingInformationException {
 
         MilitaryState militaryState;
 
@@ -90,6 +89,9 @@ public class MilitaryFragment extends Fragment {
             String rank = et_rank.getText().toString();
 
             militaryState = new MilitaryState(entryDate, dischargeDate, dutyArea, rank);
+            militaryState.checkValidity();
+
+            if (!militaryState.isValid()) throw new MissingInformationException();
 
         } else {
             militaryState = new MilitaryState(false);
@@ -125,5 +127,10 @@ public class MilitaryFragment extends Fragment {
         tbHasDone = view.findViewById(R.id.fragment_military_toggle_button_has_done);
         tbHasDone.setOnCheckedChangeListener(this::onHasDoneCheckedChange);
 
+    }
+
+    @Override
+    public String collectInformationAsString() throws MissingInformationException {
+        return getMilitaryState().toString();
     }
 }

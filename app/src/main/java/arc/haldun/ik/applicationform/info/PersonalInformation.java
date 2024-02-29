@@ -2,6 +2,8 @@ package arc.haldun.ik.applicationform.info;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+
 import arc.haldun.ik.applicationform.elements.BloodType;
 import arc.haldun.ik.applicationform.elements.Children;
 import arc.haldun.ik.applicationform.elements.DrivingLicence;
@@ -109,5 +111,39 @@ public class PersonalInformation {
         return classString;
     }
 
+    public void checkValidity() throws MissingInformationException {
 
+        ArrayList<String> missingFields = new ArrayList<>();
+
+        if (name.isEmpty()) missingFields.add("name");
+        if (surname.isEmpty()) missingFields.add("surname");
+        if (registrationProvince.isEmpty()) missingFields.add("registrationProvince");
+        if (bornPlace.isEmpty()) missingFields.add("bornPlace");
+        if (birthDate.isEmpty()) missingFields.add("birthDate");
+        if (motherName.isEmpty()) missingFields.add("motherName");
+        if (fatherName.isEmpty()) missingFields.add("fatherName");
+        if (job.isEmpty()) missingFields.add("job");
+        if (sskNo.isEmpty()) missingFields.add("sskNo");
+        if (email.isEmpty()) missingFields.add("email");
+        if (phoneNumber.isEmpty()) missingFields.add("phoneNumber");
+        if (homePhoneNumber.isEmpty()) missingFields.add("homePhoneNumber");
+        if (livingAddress.isEmpty()) missingFields.add("livingAddress");
+        if (!bloodType.isValid()) missingFields.add("bloodType");
+        if (!children.isValid()) missingFields.add("children");
+        if (!drivingLicence.isValid()) missingFields.add("drivingLicence");
+
+        // Check missing fields.
+        if (missingFields.size() > 0)
+            throw new MissingInformationException(
+                    missingFields.toArray(missingFields.toArray(new String[0])));
+    }
+
+    private boolean isValid() {
+
+        return id != null && !name.isEmpty() && !surname.isEmpty() && !registrationProvince.isEmpty()
+                && !bornPlace.isEmpty() && !birthDate.isEmpty() && !motherName.isEmpty()
+                && !fatherName.isEmpty() && !job.isEmpty() && !sskNo.isEmpty() && !email.isEmpty()
+                && !phoneNumber.isEmpty() && !homePhoneNumber.isEmpty() && !livingAddress.isEmpty()
+                && bloodType.isValid() && children.isValid() && drivingLicence.isValid();
+    }
 }

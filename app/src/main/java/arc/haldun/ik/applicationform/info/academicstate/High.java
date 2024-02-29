@@ -6,14 +6,24 @@ package arc.haldun.ik.applicationform.info.academicstate;
 
 public class High extends First {
 
-    private final String branch;
-    private final String degree;
+    private String branch;
+    private String degree;
 
     public High(String startDate, String endDate, String name, String region, String branch, String degree) {
         super(startDate, endDate, name, region);
 
         this.branch = branch;
         this.degree = degree;
+
+        checkFields();
+    }
+
+    @Override
+    protected void checkFields() {
+        //super.checkFields();
+
+        if (branch == null) branch = "";
+        if (degree == null) degree = "";
     }
 
     public String getBranch() {

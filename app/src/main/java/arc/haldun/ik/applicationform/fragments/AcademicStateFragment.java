@@ -1,14 +1,14 @@
-package arc.haldun.ik.applicationform;
+package arc.haldun.ik.applicationform.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.info.academicstate.AcademicState;
@@ -21,7 +21,7 @@ import arc.haldun.ik.exceptions.MissingInformationException;
  * Use the {@link AcademicStateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AcademicStateFragment extends Fragment {
+public class AcademicStateFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,7 +54,9 @@ public class AcademicStateFragment extends Fragment {
     private boolean hasPrimarySchool, hasMiddleSchool, hasHighSchool, hasUniversity, hasMaster;
 
     public AcademicStateFragment() {
-        // Required empty public constructor
+
+        // Constructor must be empty
+
     }
 
     /**
@@ -91,6 +93,14 @@ public class AcademicStateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_academic_state, container, false);
         initViews(view);
 
+        // Set all field's statue to false
+        hasPrimarySchool = false;
+        hasMiddleSchool = false;
+        hasHighSchool = false;
+        hasUniversity = false;
+        hasMaster = false;
+        updateFieldStatue();
+
         return view;
     }
 
@@ -111,8 +121,8 @@ public class AcademicStateFragment extends Fragment {
         String primarySchoolRegion = et_primarySchool_Region.getText().toString();
 
         // If primary school is checked and one of the areas is null throw exception
-        if (hasPrimarySchool && primarySchoolName.isEmpty() || primarySchoolStart.isEmpty() ||
-                primarySchoolEnd.isEmpty() || primarySchoolRegion.isEmpty()) {
+        if (hasPrimarySchool && (primarySchoolName.isEmpty() || primarySchoolStart.isEmpty() ||
+                primarySchoolEnd.isEmpty() || primarySchoolRegion.isEmpty())) {
 
             throw new MissingInformationException("Bad Primary School Information");
         }
@@ -128,8 +138,8 @@ public class AcademicStateFragment extends Fragment {
         String middleSchoolRegion = et_middleSchool_Region.getText().toString();
 
         // If middle school is checked and one of the areas is null throw exception
-        if (hasMiddleSchool && middleSchoolName.isEmpty() || middleSchoolStart.isEmpty()
-                || middleSchoolEnd.isEmpty() || middleSchoolRegion.isEmpty()) {
+        if (hasMiddleSchool && (middleSchoolName.isEmpty() || middleSchoolStart.isEmpty()
+                || middleSchoolEnd.isEmpty() || middleSchoolRegion.isEmpty())) {
 
             throw new MissingInformationException("Bad Middle School Information");
 
@@ -148,9 +158,9 @@ public class AcademicStateFragment extends Fragment {
         String highSchoolBranch = et_highSchool_Branch.getText().toString();
 
         // If high school is checked and one of the areas is null throw exception
-        if (hasHighSchool && highSchoolName.isEmpty() || highSchoolStart.isEmpty()
+        if (hasHighSchool && (highSchoolName.isEmpty() || highSchoolStart.isEmpty()
                 || highSchoolEnd.isEmpty() || highSchoolRegion.isEmpty()
-                || highSchoolDegree.isEmpty() || highSchoolBranch.isEmpty()) {
+                || highSchoolDegree.isEmpty() || highSchoolBranch.isEmpty())) {
 
             throw new MissingInformationException("Bad High School Information");
 
@@ -169,9 +179,9 @@ public class AcademicStateFragment extends Fragment {
         String universityBranch = et_university_Branch.getText().toString();
 
         // If university is checked and one of the areas is null throw exception
-        if (hasUniversity && universityName.isEmpty() || universityStart.isEmpty()
+        if (hasUniversity && (universityName.isEmpty() || universityStart.isEmpty()
                 || universityEnd.isEmpty() || universityRegion.isEmpty()
-                || universityDegree.isEmpty() || universityBranch.isEmpty()) {
+                || universityDegree.isEmpty() || universityBranch.isEmpty())) {
 
             throw new MissingInformationException("Bad University Information");
 
@@ -190,8 +200,8 @@ public class AcademicStateFragment extends Fragment {
         String masterBranch = et_master_Branch.getText().toString();
 
         // If master is checked and one of the areas is null throw exception7
-        if (hasMaster && masterName.isEmpty() || masterStart.isEmpty() || masterEnd.isEmpty()
-                || masterRegion.isEmpty() || masterDegree.isEmpty()|| masterBranch.isEmpty()) {
+        if (hasMaster && (masterName.isEmpty() || masterStart.isEmpty() || masterEnd.isEmpty()
+                || masterRegion.isEmpty() || masterDegree.isEmpty()|| masterBranch.isEmpty())) {
 
             throw new MissingInformationException("Bad Master Information");
 
@@ -209,10 +219,81 @@ public class AcademicStateFragment extends Fragment {
         return academicState;
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        if (buttonView.equals(cbPrimarySchool)) {
+            hasPrimarySchool = isChecked;
+        }
+
+        if (buttonView.equals(cbMiddleSchool)) {
+            hasMiddleSchool = isChecked;
+        }
+
+        if (buttonView.equals(cbHighSchool)) {
+            hasHighSchool = isChecked;
+        }
+
+        if (buttonView.equals(cbUniversity)) {
+            hasUniversity = isChecked;
+        }
+
+        if (buttonView.equals(cbMaster)) {
+            hasMaster = isChecked;
+        }
+
+        updateFieldStatue();
+
+    }
+
+    /**
+     * This code used for updating fields' enabled/disabled statue.
+     */
+    private void updateFieldStatue() {
+
+        // Primary school
+        et_primarySchool_Name.setEnabled(hasPrimarySchool);
+        et_primarySchool_Start.setEnabled(hasPrimarySchool);
+        et_primarySchool_End.setEnabled(hasPrimarySchool);
+        et_primarySchool_Region.setEnabled(hasPrimarySchool);
+
+        // Middle school
+        et_middleSchool_Name.setEnabled(hasMiddleSchool);
+        et_middleSchool_Start.setEnabled(hasMiddleSchool);
+        et_middleSchool_End.setEnabled(hasMiddleSchool);
+        et_middleSchool_Region.setEnabled(hasMiddleSchool);
+
+        // High school
+        et_highSchool_Name.setEnabled(hasHighSchool);
+        et_highSchool_Start.setEnabled(hasHighSchool);
+        et_highSchool_End.setEnabled(hasHighSchool);
+        et_highSchool_Region.setEnabled(hasHighSchool);
+        et_highSchool_Degree.setEnabled(hasHighSchool);
+        et_highSchool_Branch.setEnabled(hasHighSchool);
+
+        // University
+        et_university_Name.setEnabled(hasUniversity);
+        et_university_Start.setEnabled(hasUniversity);
+        et_university_End.setEnabled(hasUniversity);
+        et_university_Region.setEnabled(hasUniversity);
+        et_university_Degree.setEnabled(hasUniversity);
+        et_university_Branch.setEnabled(hasUniversity);
+
+        // Master
+        et_master_Name.setEnabled(hasMaster);
+        et_master_Start.setEnabled(hasMaster);
+        et_master_End.setEnabled(hasMaster);
+        et_master_Region.setEnabled(hasMaster);
+        et_master_Degree.setEnabled(hasMaster);
+        et_master_Branch.setEnabled(hasMaster);
+
+    }
+
     private void initViews(View view) {
 
         // Primary school
         cbPrimarySchool = view.findViewById(R.id.fragment_academic_state_cb_primary_school);
+        cbPrimarySchool.setOnCheckedChangeListener(this);
 
         et_primarySchool_Name = view.findViewById(R.id.fragment_academic_state_et_primary_school_name);
         et_primarySchool_Start = view.findViewById(R.id.fragment_academic_state_et_primary_school_start_date);
@@ -221,6 +302,7 @@ public class AcademicStateFragment extends Fragment {
 
         // Middle school
         cbMiddleSchool = view.findViewById(R.id.fragment_academic_state_cb_middle_school);
+        cbMiddleSchool.setOnCheckedChangeListener(this);
 
         et_middleSchool_Name = view.findViewById(R.id.fragment_academic_state_et_middle_school_name);
         et_middleSchool_Start = view.findViewById(R.id.fragment_academic_state_et_middle_school_start_date);
@@ -229,6 +311,7 @@ public class AcademicStateFragment extends Fragment {
 
         // High school
         cbHighSchool = view.findViewById(R.id.fragment_academic_state_cb_high_school);
+        cbHighSchool.setOnCheckedChangeListener(this);
 
         et_highSchool_Name = view.findViewById(R.id.fragment_academic_state_et_high_school_name);
         et_highSchool_Start = view.findViewById(R.id.fragment_academic_state_et_high_school_start_date);
@@ -239,6 +322,7 @@ public class AcademicStateFragment extends Fragment {
 
         // University
         cbUniversity = view.findViewById(R.id.fragment_academic_state_cb_university);
+        cbUniversity.setOnCheckedChangeListener(this);
 
         et_university_Name = view.findViewById(R.id.fragment_academic_state_et_university_name);
         et_university_Start = view.findViewById(R.id.fragment_academic_state_et_university_start_date);
@@ -249,6 +333,7 @@ public class AcademicStateFragment extends Fragment {
 
         // Master
         cbMaster = view.findViewById(R.id.fragment_academic_state_cb_master);
+        cbMaster.setOnCheckedChangeListener(this);
 
         et_master_Name = view.findViewById(R.id.fragment_academic_state_et_master_name);
         et_master_Start = view.findViewById(R.id.fragment_academic_state_et_master_start_date);
@@ -257,6 +342,10 @@ public class AcademicStateFragment extends Fragment {
         et_master_Degree = view.findViewById(R.id.fragment_academic_state_et_master_degree);
         et_master_Branch = view.findViewById(R.id.fragment_academic_state_et_master_branch);
 
-        // TODO: set check box's on checked change listener
+    }
+
+    @Override
+    public String collectInformationAsString() throws MissingInformationException {
+        return getAcademicState().toString();
     }
 }

@@ -4,6 +4,35 @@
     <string name="surname">Soyad</string>
     <string name="id">T.C. Kimlik No</string>
     <string name="email">E-Posta</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="other">Diğer</string>
+
+    <!--Languages-->
+    <string name="english">İgilizce</string>
+    <string name="german">Almanca</string>
+    <string name="french">Fransızca</string>
+    <string name="russian">Rusça</string>
+    <string name="chinese">Çince</string>
+
+    <!--Language levels-->
+    <string name="beginner">Başlangıç</string>
+    <string name="intermediate">Orta</string>
+    <string name="advanced">İleri</string>
+
+    <!--Languages-->
+    <string-array name="langs">
+        <item>@string/english</item>
+        <item>@string/german</item>
+        <item>@string/french</item>
+        <item>@string/russian</item>
+        <item>@string/chinese</item>
+        <item>@string/other</item>
+    </string-array>
+
+    <!--Language levels-->
+    <string-array name="lang_levels">
+        <item>@string/beginner</item>
+        <item>@string/intermediate</item>
+        <item>@string/advanced</item>
+    </string-array>
 </resources>

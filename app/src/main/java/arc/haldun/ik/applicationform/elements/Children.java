@@ -22,4 +22,8 @@ public class Children {
 
         return classString;
     }
+
+    public boolean isValid() {
+        return true;
+    }
 }

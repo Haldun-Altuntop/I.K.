@@ -53,4 +53,16 @@ public class DrivingLicence {
 
         return classString;
     }
+
+    public boolean isValid() {
+
+        if (hasLicence) {
+
+            return !receiptDate.isEmpty() && !licenceClass.isEmpty();
+
+        } else {
+            return true;
+        }
+
+    }
 }

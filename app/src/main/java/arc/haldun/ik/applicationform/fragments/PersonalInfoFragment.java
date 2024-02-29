@@ -1,8 +1,6 @@
-package arc.haldun.ik.applicationform;
+package arc.haldun.ik.applicationform.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.DrivingLicence;
@@ -113,6 +112,8 @@ public class PersonalInfoFragment extends Fragment {
                 email, phoneNumber, homePhoneNumber, bloodType, bloodTypeRh, son, daughter,
                 getDrivingLicence(), livingAddress);
 
+        personalInformation.checkValidity();
+
         return personalInformation;
 
     }
@@ -204,5 +205,10 @@ public class PersonalInfoFragment extends Fragment {
         cb_drivingLicence = container.findViewById(R.id.fragment_personal_info_check_box_driving_licence);
         cb_drivingLicence.setOnCheckedChangeListener(this::onHasDrivingLicenceChange);
 
+    }
+
+    @Override
+    public String collectInformationAsString() throws MissingInformationException {
+        return getPersonalInfo().toString();
     }
 }

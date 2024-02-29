@@ -1,11 +1,11 @@
 package arc.haldun.ik;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import arc.haldun.ik.applicationform.ApplicationFormActivity;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
             startActivity(new Intent(getApplicationContext(), ApplicationFormActivity.class)

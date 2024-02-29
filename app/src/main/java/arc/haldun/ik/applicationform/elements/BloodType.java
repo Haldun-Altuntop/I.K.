@@ -37,4 +37,8 @@ public class BloodType {
 
         return classString;
     }
+
+    public boolean isValid() {
+        return !name.isEmpty() && RH.isEmpty();
+    }
 }

@@ -6,16 +6,30 @@ package arc.haldun.ik.applicationform.info.academicstate;
 
 public class First {
 
-    private final String startDate;
-    private final String endDate;
-    private final String name;
-    private final String region;
+    private String startDate;
+    private String endDate;
+    private String name;
+    private String region;
 
     public First(String startDate, String endDate, String name, String region) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.name = name;
         this.region = region;
+
+        checkFields();
+    }
+
+    /**
+     * If fields are null, makes them empty
+     */
+    protected void checkFields() {
+
+        if (startDate == null) startDate = "";
+        if (endDate == null) endDate = "";
+        if (name == null) name = "";
+        if (region == null) region = "";
+
     }
 
     public String getStartDate() {
