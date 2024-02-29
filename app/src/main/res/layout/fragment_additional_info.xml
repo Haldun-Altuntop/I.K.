@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".applicationform.fragments.AdditionalInfoFragment"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/fragment_additional_info_linear_layout_additional_income"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/fragment_additional_info_tv_tittle_additional_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ek Gelir"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/fragment_additional_info_et_additional_income_amount"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="50dp"
+                android:hint="Aylık Ek Gelir" />
+
+            <Spinner
+                android:id="@+id/fragment_additional_info_spinner_dolar_tl"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_additional_info_linear_layout_current_residence"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/fragment_additional_info_linear_layout_additional_income">
+
+        <TextView
+            android:id="@+id/fragment_additional_info_tv_tittle_residence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mevcut İkamet Yeri"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="50dp">
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kira" />
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_possession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mülk" />
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_familys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ailenin" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_additional_info_linear_layout_current_social_assurance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/fragment_additional_info_linear_layout_current_residence">
+
+        <TextView
+            android:id="@+id/fragment_additional_info_tv_tittle_social_assurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mevcut Sosyal Güvence"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="50dp">
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_ssk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SSK" />
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_bagkur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bağkur" />
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_emkeli_sandigi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emekli Sandığı" />
+
+            <CheckBox
+                android:id="@+id/fragment_additional_info_cb_yesil_kart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yeşil Kart" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</RelativeLayout>
