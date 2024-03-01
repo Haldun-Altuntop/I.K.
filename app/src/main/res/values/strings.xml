@@ -6,6 +6,8 @@
     <string name="email">E-Posta</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="other">Diğer</string>
+    <string name="tl">TL</string>
+    <string name="dollar">Dolar</string>
 
     <!--Languages-->
     <string name="english">İgilizce</string>
@@ -34,5 +36,11 @@
         <item>@string/beginner</item>
         <item>@string/intermediate</item>
         <item>@string/advanced</item>
+    </string-array>
+
+    <!--Currency-->
+    <string-array name="currency">
+        <item>@string/tl</item>
+        <item>@string/dollar</item>
     </string-array>
 </resources>

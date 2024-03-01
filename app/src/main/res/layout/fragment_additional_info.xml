@@ -61,24 +61,25 @@
             android:textColor="@color/white" />
 
         <RadioGroup
+            android:id="@+id/fragment_additional_info_radio_group_current_residence"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="50dp">
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_rent"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kira" />
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_possession"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_possession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mülk" />
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_familys"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_familys"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ailenin" />
@@ -105,30 +106,31 @@
 
 
         <RadioGroup
+            android:id="@+id/fragment_additional_info_radio_group_social_assurance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="50dp">
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_ssk"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_ssk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SSK" />
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_bagkur"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_bagkur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bağkur" />
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_emkeli_sandigi"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_emkeli_sandigi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Emekli Sandığı" />
 
-            <CheckBox
-                android:id="@+id/fragment_additional_info_cb_yesil_kart"
+            <RadioButton
+                android:id="@+id/fragment_additional_info_rb_yesil_kart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Yeşil Kart" />

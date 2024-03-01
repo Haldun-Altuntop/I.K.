@@ -11,6 +11,7 @@ import android.widget.Toast;
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.Language;
 import arc.haldun.ik.applicationform.fragments.AcademicStateFragment;
+import arc.haldun.ik.applicationform.fragments.AdditionalInfoFragment;
 import arc.haldun.ik.applicationform.fragments.Fragment;
 import arc.haldun.ik.applicationform.fragments.LanguageFragment;
 import arc.haldun.ik.applicationform.fragments.MilitaryFragment;
@@ -30,6 +31,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
     private MilitaryFragment militaryFragment;
     private AcademicStateFragment academicStateFragment;
     private LanguageFragment  languageFragment;
+    private AdditionalInfoFragment additionalInfoFragment;
 
     // Other components
     private Fragment[] fragments;
@@ -55,6 +57,19 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
         // DEBUG
         //setCurrentFragmentIndex(3);
+        btnCommit.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                try {
+                    System.out.println(getCurrentFragment().collectInformationAsString());
+                } catch (MissingInformationException e) {
+                    showMissingInformationDialog(e.getMissingFields());
+                }
+
+                return true;
+            }
+        });
     }
 
     private void showMissingInformationDialog(String... missingFields) {
@@ -88,7 +103,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 getCurrentFragment().collectInformationAsString();
             } catch (MissingInformationException e) {
                 showMissingInformationDialog(e.getMissingFields());
-                return;
+                //return;
             }
 
             if (currentFragmentIndex == fragments.length - 1) {
@@ -190,6 +205,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         militaryFragment = new MilitaryFragment();
         academicStateFragment = new AcademicStateFragment();
         languageFragment = new LanguageFragment();
+        additionalInfoFragment = new AdditionalInfoFragment();
     }
 
     private void  initViews() {
@@ -211,7 +227,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 personalInfoFragment,
                 militaryFragment,
                 academicStateFragment,
-                languageFragment
+                languageFragment,
+                additionalInfoFragment
         };
     }
 }
