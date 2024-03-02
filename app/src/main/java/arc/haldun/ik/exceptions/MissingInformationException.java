@@ -6,10 +6,11 @@ package arc.haldun.ik.exceptions;
 
 public class MissingInformationException extends Exception{
 
-    private String[] missingFields;
+    private final String[] missingFields;
 
     public MissingInformationException(String msg) {
         super(msg);
+        missingFields = new String[] {msg};
     }
 
     public MissingInformationException(String... missingFields) {

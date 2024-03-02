@@ -10,11 +10,16 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.info.academicstate.AcademicState;
 import arc.haldun.ik.applicationform.info.academicstate.First;
 import arc.haldun.ik.applicationform.info.academicstate.High;
 import arc.haldun.ik.exceptions.MissingInformationException;
+import arc.haldun.ik.utility.EditTextUtility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,6 +111,8 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
 
     public AcademicState getAcademicState() throws MissingInformationException {
 
+        ArrayList<String> missingFields = new ArrayList<>();
+
         AcademicState academicState;
 
         First primarySchool;
@@ -115,16 +122,16 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
         High master;
 
         // Primary school
-        String primarySchoolName = et_primarySchool_Name.getText().toString();
-        String primarySchoolStart = et_primarySchool_Start.getText().toString();
-        String primarySchoolEnd = et_primarySchool_End.getText().toString();
-        String primarySchoolRegion = et_primarySchool_Region.getText().toString();
+        String primarySchoolName = EditTextUtility.getTextFromEditText(et_primarySchool_Name);
+        String primarySchoolStart = EditTextUtility.getTextFromEditText(et_primarySchool_Start);
+        String primarySchoolEnd = EditTextUtility.getTextFromEditText(et_primarySchool_End);
+        String primarySchoolRegion = EditTextUtility.getTextFromEditText(et_primarySchool_Region);
 
         // If primary school is checked and one of the areas is null throw exception
         if (hasPrimarySchool && (primarySchoolName.isEmpty() || primarySchoolStart.isEmpty() ||
                 primarySchoolEnd.isEmpty() || primarySchoolRegion.isEmpty())) {
 
-            throw new MissingInformationException("Bad Primary School Information");
+            missingFields.add("İlkokul Bilgileri");
         }
 
         // Init primary school
@@ -132,16 +139,16 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
                 primarySchoolName, primarySchoolRegion);
 
         // Middle school
-        String middleSchoolName = et_middleSchool_Name.getText().toString();
-        String middleSchoolStart = et_middleSchool_Start.getText().toString();
-        String middleSchoolEnd = et_middleSchool_End.getText().toString();
-        String middleSchoolRegion = et_middleSchool_Region.getText().toString();
+        String middleSchoolName = EditTextUtility.getTextFromEditText(et_middleSchool_Name);
+        String middleSchoolStart = EditTextUtility.getTextFromEditText(et_middleSchool_Start);
+        String middleSchoolEnd = EditTextUtility.getTextFromEditText(et_middleSchool_End);
+        String middleSchoolRegion = EditTextUtility.getTextFromEditText(et_middleSchool_Region);
 
         // If middle school is checked and one of the areas is null throw exception
         if (hasMiddleSchool && (middleSchoolName.isEmpty() || middleSchoolStart.isEmpty()
                 || middleSchoolEnd.isEmpty() || middleSchoolRegion.isEmpty())) {
 
-            throw new MissingInformationException("Bad Middle School Information");
+            missingFields.add("Ortaokul Bilgileri");
 
         }
 
@@ -150,19 +157,19 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
                 middleSchoolName, middleSchoolRegion);
 
         // High school
-        String highSchoolName = et_highSchool_Name.getText().toString();
-        String highSchoolStart = et_highSchool_Start.getText().toString();
-        String highSchoolEnd = et_highSchool_End.getText().toString();
-        String highSchoolRegion = et_highSchool_Region.getText().toString();
-        String highSchoolDegree = et_highSchool_Degree.getText().toString();
-        String highSchoolBranch = et_highSchool_Branch.getText().toString();
+        String highSchoolName = EditTextUtility.getTextFromEditText(et_highSchool_Name);
+        String highSchoolStart = EditTextUtility.getTextFromEditText(et_highSchool_Start);
+        String highSchoolEnd = EditTextUtility.getTextFromEditText(et_highSchool_End);
+        String highSchoolRegion = EditTextUtility.getTextFromEditText(et_highSchool_Region);
+        String highSchoolDegree = EditTextUtility.getTextFromEditText(et_highSchool_Degree);
+        String highSchoolBranch = EditTextUtility.getTextFromEditText(et_highSchool_Branch);
 
         // If high school is checked and one of the areas is null throw exception
         if (hasHighSchool && (highSchoolName.isEmpty() || highSchoolStart.isEmpty()
                 || highSchoolEnd.isEmpty() || highSchoolRegion.isEmpty()
                 || highSchoolDegree.isEmpty() || highSchoolBranch.isEmpty())) {
 
-            throw new MissingInformationException("Bad High School Information");
+            missingFields.add("Lise Bilgileri");
 
         }
 
@@ -171,19 +178,19 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
                 highSchoolRegion, highSchoolBranch, highSchoolDegree);
 
         // University
-        String universityName = et_university_Name.getText().toString();
-        String universityStart = et_university_Start.getText().toString();
-        String universityEnd = et_university_End.getText().toString();
-        String universityRegion = et_university_Region.getText().toString();
-        String universityDegree = et_university_Degree.getText().toString();
-        String universityBranch = et_university_Branch.getText().toString();
+        String universityName = EditTextUtility.getTextFromEditText(et_university_Name);
+        String universityStart =EditTextUtility.getTextFromEditText(et_university_Start);
+        String universityEnd = EditTextUtility.getTextFromEditText(et_university_End);
+        String universityRegion = EditTextUtility.getTextFromEditText(et_university_Region);
+        String universityDegree = EditTextUtility.getTextFromEditText(et_university_Degree);
+        String universityBranch = EditTextUtility.getTextFromEditText(et_university_Branch);
 
         // If university is checked and one of the areas is null throw exception
         if (hasUniversity && (universityName.isEmpty() || universityStart.isEmpty()
                 || universityEnd.isEmpty() || universityRegion.isEmpty()
                 || universityDegree.isEmpty() || universityBranch.isEmpty())) {
 
-            throw new MissingInformationException("Bad University Information");
+            missingFields.add("Üniversite Bilgileri");
 
         }
 
@@ -192,20 +199,24 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
                 universityRegion, universityBranch, universityDegree);
 
         // Master
-        String masterName = et_master_Name.getText().toString();
-        String masterStart = et_master_Start.getText().toString();
-        String masterEnd = et_master_End.getText().toString();
-        String masterRegion = et_master_Region.getText().toString();
-        String masterDegree = et_master_Degree.getText().toString();
-        String masterBranch = et_master_Branch.getText().toString();
+        String masterName = EditTextUtility.getTextFromEditText(et_master_Name);
+        String masterStart = EditTextUtility.getTextFromEditText(et_master_Start);
+        String masterEnd = EditTextUtility.getTextFromEditText(et_master_End);
+        String masterRegion = EditTextUtility.getTextFromEditText(et_master_Region);
+        String masterDegree = EditTextUtility.getTextFromEditText(et_master_Degree);
+        String masterBranch = EditTextUtility.getTextFromEditText(et_master_Branch);
 
         // If master is checked and one of the areas is null throw exception7
         if (hasMaster && (masterName.isEmpty() || masterStart.isEmpty() || masterEnd.isEmpty()
                 || masterRegion.isEmpty() || masterDegree.isEmpty()|| masterBranch.isEmpty())) {
 
-            throw new MissingInformationException("Bad Master Information");
+            missingFields.add("Lisansüstü Çalışmalar Bilgileri");
 
         }
+
+        // Check missing fields
+        if (missingFields.size() > 0)
+            throw new MissingInformationException(missingFields.toArray(new String[0]));
 
         // Init master
         master = new High(masterStart, masterEnd, masterName,
@@ -289,7 +300,7 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
 
     }
 
-    private void initViews(View view) {
+    private void initViews(@NonNull View view) {
 
         // Primary school
         cbPrimarySchool = view.findViewById(R.id.fragment_academic_state_cb_primary_school);

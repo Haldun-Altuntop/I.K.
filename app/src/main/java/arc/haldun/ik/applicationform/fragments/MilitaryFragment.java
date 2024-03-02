@@ -91,8 +91,6 @@ public class MilitaryFragment extends Fragment {
             militaryState = new MilitaryState(entryDate, dischargeDate, dutyArea, rank);
             militaryState.checkValidity();
 
-            if (!militaryState.isValid()) throw new MissingInformationException();
-
         } else {
             militaryState = new MilitaryState(false);
         }

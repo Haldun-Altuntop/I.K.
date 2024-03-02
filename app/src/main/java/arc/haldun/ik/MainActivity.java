@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import arc.haldun.ik.applicationform.ApplicationFormActivity;
 
+/**
+ * This activity will be implemented as Splash Screen
+ */
 public class MainActivity extends AppCompatActivity {
-
-    /**
-     * This activity will be implemented as Splash Screen
-     */
 
     HandlerThread thread;
 

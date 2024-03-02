@@ -12,6 +12,7 @@ import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.Language;
 import arc.haldun.ik.applicationform.fragments.AcademicStateFragment;
 import arc.haldun.ik.applicationform.fragments.AdditionalInfoFragment;
+import arc.haldun.ik.applicationform.fragments.ExperiencesFragment;
 import arc.haldun.ik.applicationform.fragments.Fragment;
 import arc.haldun.ik.applicationform.fragments.LanguageFragment;
 import arc.haldun.ik.applicationform.fragments.MilitaryFragment;
@@ -27,11 +28,12 @@ public class ApplicationFormActivity extends AppCompatActivity {
     private Button btnPrevious, btnCommit, btnNext;
 
     // Fragments
-    private PersonalInfoFragment personalInfoFragment;
-    private MilitaryFragment militaryFragment;
-    private AcademicStateFragment academicStateFragment;
-    private LanguageFragment  languageFragment;
-    private AdditionalInfoFragment additionalInfoFragment;
+    private Fragment personalInfoFragment;
+    private Fragment militaryFragment;
+    private Fragment academicStateFragment;
+    private Fragment  languageFragment;
+    private Fragment additionalInfoFragment;
+    private Fragment experiencesFragment;
 
     // Other components
     private Fragment[] fragments;
@@ -55,7 +57,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         // Set current fragment
         setCurrentFragmentIndex(currentFragmentIndex);
 
-        // DEBUG
+        /** DEBUG*/
         //setCurrentFragmentIndex(3);
         btnCommit.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -103,6 +105,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 getCurrentFragment().collectInformationAsString();
             } catch (MissingInformationException e) {
                 showMissingInformationDialog(e.getMissingFields());
+                e.printStackTrace();
                 //return;
             }
 
@@ -136,6 +139,22 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
     private void btnCommitClicked(View view) {
 
+        StringBuilder information = new StringBuilder();
+
+        try {
+
+            for (Fragment fragment : fragments) {
+                information.append(fragment.collectInformationAsString()).append("\n");
+            }
+        } catch (MissingInformationException e) {
+            showMissingInformationDialog(e.getMissingFields());
+            e.printStackTrace();
+            return;
+        }
+
+        System.out.println(information.toString());
+
+        /*
         try {
 
             PersonalInformation personalInformation = this.personalInfoFragment.getPersonalInfo();
@@ -162,6 +181,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
                     "doldurduğuğunuzdan emin olun ve bağlantınızı kontrol edin.",
                     Toast.LENGTH_LONG).show();
         }
+
+         */
     }
 
     private void showMissingInformationDialog(String msg) {
@@ -175,8 +196,11 @@ public class ApplicationFormActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @Deprecated
     private void printLanguages() {
+        throw new UnsupportedOperationException();
 
+        /*
         Language[] languages = languageFragment.getLanguages();
 
         System.out.println("\nYabancı dil:\n");
@@ -184,6 +208,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
         for (Language language : languages) {
             System.out.println(language.toString());
         }
+
+         */
     }
 
     private Fragment getCurrentFragment() {
@@ -206,6 +232,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         academicStateFragment = new AcademicStateFragment();
         languageFragment = new LanguageFragment();
         additionalInfoFragment = new AdditionalInfoFragment();
+        experiencesFragment = new ExperiencesFragment();
     }
 
     private void  initViews() {
@@ -228,7 +255,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 militaryFragment,
                 academicStateFragment,
                 languageFragment,
-                additionalInfoFragment
+                additionalInfoFragment,
+                experiencesFragment
         };
     }
 }

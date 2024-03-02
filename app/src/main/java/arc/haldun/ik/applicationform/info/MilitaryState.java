@@ -97,10 +97,10 @@ public class MilitaryState {
 
         ArrayList<String> missingFields = new ArrayList<>();
 
-        if (entryDate.isEmpty()) missingFields.add(entryDate);
-        if (dischargeDate.isEmpty()) missingFields.add(dischargeDate);
-        if (dutyArea.isEmpty()) missingFields.add(dutyArea);
-        if (rank.isEmpty()) missingFields.add(rank);
+        if (entryDate.isEmpty()) missingFields.add("Giriş Tarihi");
+        if (dischargeDate.isEmpty()) missingFields.add("Terhis tarihi");
+        if (dutyArea.isEmpty()) missingFields.add("Görev Yeri");
+        if (rank.isEmpty()) missingFields.add("Rütbe");
 
         // Check missing fields.
         if (missingFields.size() > 0) {

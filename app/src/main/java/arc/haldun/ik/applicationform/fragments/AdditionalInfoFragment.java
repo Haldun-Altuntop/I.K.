@@ -2,6 +2,7 @@ package arc.haldun.ik.applicationform.fragments;
 
 import android.os.Bundle;
 
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,15 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.Currency;
 import arc.haldun.ik.applicationform.elements.Residence;
 import arc.haldun.ik.applicationform.elements.SocialAssurance;
 import arc.haldun.ik.exceptions.MissingInformationException;
+import arc.haldun.ik.utility.EditTextUtility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -149,14 +154,20 @@ public class AdditionalInfoFragment extends Fragment implements RadioGroup.OnChe
     @Override
     public String collectInformationAsString() throws MissingInformationException {
 
-        String incomeAmount = et_additionalMonthlyIncome.getText().toString();
+        ArrayList<String> missingFields = new ArrayList<>();
+
+        Editable e;
+        String incomeAmount = EditTextUtility.getTextFromEditText(et_additionalMonthlyIncome);
         String currency = Currency.findById(spinner_currency.getSelectedItemPosition()).toString();
 
         // Check fields
-        if (incomeAmount.isEmpty()) throw new MissingInformationException("Aylık Gelir");
-        if (currency.isEmpty()) throw new MissingInformationException("Para Birimi");
-        if (currentResidence.isEmpty()) throw new MissingInformationException("Mevcut İkamet Yeri");
-        if (socialAssurance.isEmpty()) throw new MissingInformationException("Mevcut Sosyel Güvence");
+        if (incomeAmount.isEmpty()) missingFields.add("Aylık Gelir");
+        if (currency.isEmpty()) missingFields.add("Para Birimi");
+        if (currentResidence == null) missingFields.add("Mevcut İkametgâh Yeri");
+        if (socialAssurance == null) missingFields.add("Sosya Güvence");
+
+        if (missingFields.size() > 0)
+            throw new MissingInformationException(missingFields.toArray(new String[0]));
 
         StringBuilder stringBuilder = new StringBuilder();
 
