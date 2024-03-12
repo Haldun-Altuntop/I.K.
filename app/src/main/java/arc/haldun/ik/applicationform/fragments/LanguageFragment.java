@@ -11,13 +11,9 @@ import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.adapters.LanguageRecyclerAdapter;
 import arc.haldun.ik.applicationform.elements.Language;
-import arc.haldun.ik.exceptions.MissingInformationException;
 
 /**
  * A simple {@link Fragment} subclass.

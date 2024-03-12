@@ -1,15 +1,13 @@
 package arc.haldun.ik.applicationform;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import arc.haldun.ik.R;
-import arc.haldun.ik.applicationform.elements.Language;
 import arc.haldun.ik.applicationform.fragments.AcademicStateFragment;
 import arc.haldun.ik.applicationform.fragments.AdditionalInfoFragment;
 import arc.haldun.ik.applicationform.fragments.ExperiencesFragment;
@@ -17,10 +15,7 @@ import arc.haldun.ik.applicationform.fragments.Fragment;
 import arc.haldun.ik.applicationform.fragments.LanguageFragment;
 import arc.haldun.ik.applicationform.fragments.MilitaryFragment;
 import arc.haldun.ik.applicationform.fragments.PersonalInfoFragment;
-import arc.haldun.ik.applicationform.info.MilitaryState;
-import arc.haldun.ik.applicationform.info.academicstate.AcademicState;
 import arc.haldun.ik.exceptions.MissingInformationException;
-import arc.haldun.ik.applicationform.info.PersonalInformation;
 
 public class ApplicationFormActivity extends AppCompatActivity {
 
@@ -54,23 +49,22 @@ public class ApplicationFormActivity extends AppCompatActivity {
         // Initialize other components
         initOtherComponents();
 
+        /**DEBUG*/
+        currentFragmentIndex = 5;
+
         // Set current fragment
         setCurrentFragmentIndex(currentFragmentIndex);
 
         /** DEBUG*/
-        //setCurrentFragmentIndex(3);
-        btnCommit.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
+        btnCommit.setOnLongClickListener(v -> {
 
-                try {
-                    System.out.println(getCurrentFragment().collectInformationAsString());
-                } catch (MissingInformationException e) {
-                    showMissingInformationDialog(e.getMissingFields());
-                }
-
-                return true;
+            try {
+                System.out.println(getCurrentFragment().collectInformationAsString());
+            } catch (MissingInformationException e) {
+                showMissingInformationDialog(e.getMissingFields());
             }
+
+            return true;
         });
     }
 
@@ -232,7 +226,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         academicStateFragment = new AcademicStateFragment();
         languageFragment = new LanguageFragment();
         additionalInfoFragment = new AdditionalInfoFragment();
-        experiencesFragment = new ExperiencesFragment();
+        experiencesFragment = ExperiencesFragment.newInstance();
     }
 
     private void  initViews() {

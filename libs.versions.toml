@@ -1,0 +1,16 @@
+[versions]
+# Define the dependency versions
+kotlin = "1.7.10"
+annotation = "1.7.1"
+
+[libraries]
+# Define the libraries
+annotation = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotation" }
+
+[bundles]
+# Define bundles/groups of libraries
+annotation = ["annotation"]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jvm = { id = "androidx.annotation:annotation-jvm:1.7.1", version.ref = "annotation"}

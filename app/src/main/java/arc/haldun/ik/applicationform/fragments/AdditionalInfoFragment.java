@@ -12,7 +12,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.Currency;

@@ -11,6 +11,17 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("libs") {
+            library("annotation", "androidx.annotation:annotation-jvm:1.7.1")
+            library("groovy-json", "org.codehaus.groovy:groovy-json:3.0.5")
+            library("groovy-nio", "org.codehaus.groovy:groovy-nio:3.0.5")
+            library("commons-lang3", "org.apache.commons", "commons-lang3").version {
+                strictly("[3.8, 4.0[")
+                prefer("3.9")
+            }
+        }
+    }
 }
 rootProject.name = "İ.K"
 include ':app'

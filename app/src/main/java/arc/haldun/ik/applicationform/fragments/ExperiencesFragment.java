@@ -5,8 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import arc.haldun.ik.R;
+import arc.haldun.ik.applicationform.adapters.ExperienceRecyclerAdapter;
+import arc.haldun.ik.applicationform.elements.Experience;
 import arc.haldun.ik.exceptions.MissingInformationException;
 
 /**
@@ -14,57 +20,93 @@ import arc.haldun.ik.exceptions.MissingInformationException;
  * Use the {@link ExperiencesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExperiencesFragment extends Fragment {
+public class ExperiencesFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView recyclerView_experiencesList;
+    private ExperienceRecyclerAdapter experiencesAdapter;
+    private Button btn_add;
 
     public ExperiencesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ExperiencesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ExperiencesFragment newInstance(String param1, String param2) {
-        ExperiencesFragment fragment = new ExperiencesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static ExperiencesFragment newInstance() {
+        return new ExperiencesFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_experiences, container, false);
+        View view = inflater.inflate(R.layout.fragment_experiences, container, false);
+
+        init(view);
+
+        return view;
     }
 
     @Override
     public String collectInformationAsString() throws MissingInformationException {
-        return null;
+
+        // Prepare data
+        for (int i = 0; i < experiencesAdapter.getItemCount(); i++) {
+            RecyclerView.ViewHolder viewHolder = recyclerView_experiencesList
+                    .findViewHolderForAdapterPosition(i);
+
+            if (viewHolder instanceof ExperienceRecyclerAdapter.ExperienceHolder) {
+                ((ExperienceRecyclerAdapter.ExperienceHolder) viewHolder).prepareData();
+            }
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Experience xp : experiencesAdapter.getExperiences()) {
+
+            xp.checkValidity();
+
+            stringBuilder.append("Şirket: ").append(xp.getCompany()).append("\n");
+            stringBuilder.append("Başlama Tarihi: ").append(xp.getStartingDate()).append("\n");
+            stringBuilder.append("Ayrılma Tarihi: ").append(xp.getQuittingDate()).append("\n");
+            stringBuilder.append("Referans: ").append(xp.getReference()).append("\n");
+            stringBuilder.append("Maaş: ").append(xp.getSalary()).append("\n");
+            stringBuilder.append("Ayrılma Sebebi: ").append(xp.getCauseOfQuit()).append("\n");
+
+        }
+
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == btn_add.getId()) {
+
+            experiencesAdapter.addItem(Experience.emptyInstance());
+        }
+    }
+
+    private void init(View v) {
+
+        btn_add = v.findViewById(R.id.fragment_experiences_btn_add);
+        btn_add.setOnClickListener(this);
+
+        //
+        // Init recycler view
+        //
+        recyclerView_experiencesList = v.findViewById(R.id.fragment_experiences_recycler_view);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        experiencesAdapter = new ExperienceRecyclerAdapter();
+
+        recyclerView_experiencesList.setLayoutManager(linearLayoutManager);
+        recyclerView_experiencesList.setAdapter(experiencesAdapter);
     }
 }
