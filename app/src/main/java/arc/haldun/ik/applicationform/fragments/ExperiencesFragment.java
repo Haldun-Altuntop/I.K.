@@ -51,10 +51,7 @@ public class ExperiencesFragment extends Fragment implements View.OnClickListene
         return view;
     }
 
-    @Override
-    public String collectInformationAsString() throws MissingInformationException {
-
-        // Prepare data
+    private void prepareData() {
         for (int i = 0; i < experiencesAdapter.getItemCount(); i++) {
             RecyclerView.ViewHolder viewHolder = recyclerView_experiencesList
                     .findViewHolderForAdapterPosition(i);
@@ -63,6 +60,12 @@ public class ExperiencesFragment extends Fragment implements View.OnClickListene
                 ((ExperienceRecyclerAdapter.ExperienceHolder) viewHolder).prepareData();
             }
         }
+    }
+
+    @Override
+    public String collectInformationAsString() throws MissingInformationException {
+
+        prepareData();
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -104,9 +107,16 @@ public class ExperiencesFragment extends Fragment implements View.OnClickListene
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        experiencesAdapter = new ExperienceRecyclerAdapter();
+        if (experiencesAdapter == null) experiencesAdapter = new ExperienceRecyclerAdapter();
 
         recyclerView_experiencesList.setLayoutManager(linearLayoutManager);
         recyclerView_experiencesList.setAdapter(experiencesAdapter);
+    }
+
+    @Override
+    public void onShift() {
+        super.onShift();
+
+        prepareData();
     }
 }

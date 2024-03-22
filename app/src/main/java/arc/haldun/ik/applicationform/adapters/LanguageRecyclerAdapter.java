@@ -61,7 +61,7 @@ public class LanguageRecyclerAdapter
         //private final Spinner spinner_language, spinner_speakingLevel, spinner_readingWritingLevel;
         private final LanguageItem languageItem;
 
-        private Language language;
+        private final Language language;
 
         public LanguageViewHolder(@NonNull View itemView) {
             super(itemView);

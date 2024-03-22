@@ -15,6 +15,7 @@ import arc.haldun.ik.applicationform.fragments.Fragment;
 import arc.haldun.ik.applicationform.fragments.LanguageFragment;
 import arc.haldun.ik.applicationform.fragments.MilitaryFragment;
 import arc.haldun.ik.applicationform.fragments.PersonalInfoFragment;
+import arc.haldun.ik.applicationform.fragments.ReferencesFragment;
 import arc.haldun.ik.exceptions.MissingInformationException;
 
 public class ApplicationFormActivity extends AppCompatActivity {
@@ -29,6 +30,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
     private Fragment  languageFragment;
     private Fragment additionalInfoFragment;
     private Fragment experiencesFragment;
+    private Fragment referencesFragment;
 
     // Other components
     private Fragment[] fragments;
@@ -92,6 +94,9 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
     private void onShiftPageButtonsClicked(View view) {
 
+        // Save data
+        getCurrentFragment().onShift();
+
         // On next button clicked
         if (view.equals(btnNext)) {
 
@@ -100,7 +105,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
             } catch (MissingInformationException e) {
                 showMissingInformationDialog(e.getMissingFields());
                 e.printStackTrace();
-                //return;
+                //return; // DEBUG
             }
 
             if (currentFragmentIndex == fragments.length - 1) {
@@ -217,6 +222,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.activity_form_fragment_container, fragment)
                 .commit();
+
+        getSupportActionBar().setTitle(fragment.getClass().getSimpleName());
     }
 
     private void initFragments() {
@@ -227,6 +234,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         languageFragment = new LanguageFragment();
         additionalInfoFragment = new AdditionalInfoFragment();
         experiencesFragment = ExperiencesFragment.newInstance();
+        referencesFragment = ReferencesFragment.newInstance();
     }
 
     private void  initViews() {
@@ -250,7 +258,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 academicStateFragment,
                 languageFragment,
                 additionalInfoFragment,
-                experiencesFragment
+                experiencesFragment,
+                referencesFragment
         };
     }
 }
