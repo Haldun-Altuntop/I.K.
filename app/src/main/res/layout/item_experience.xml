@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Aytılma Tarihi:" />
+            android:text="Ayrılma Tarihi:" />
 
         <EditText
             android:id="@+id/item_experience_et_quitting_date"

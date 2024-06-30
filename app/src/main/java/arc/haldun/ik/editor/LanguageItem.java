@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import java.util.Locale;
+
 import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.Language;
 
@@ -19,9 +21,9 @@ public class LanguageItem
         extends RelativeLayout
         implements AdapterView.OnItemSelectedListener, TextWatcher {
 
-    private Spinner spinner_language, spinner_speakLevel, spinner_readWriteLevel;
+    public Spinner spinner_language, spinner_speakLevel, spinner_readWriteLevel;
     private EditText et_languageName;
-    private AdapterView.OnItemSelectedListener onItemSelectedListener;
+    private AdapterView.OnItemSelectedListener onItemSelectedListener, onLanguageSelectedListener;
     private String customLanguageName = "";
     public static final int OTHER_INDEX = 5;
 
@@ -102,6 +104,7 @@ public class LanguageItem
 
         // Default action
         if (parent == spinner_language) {
+
             if (position == 5) { // 5 is the other languages
                 et_languageName.setVisibility(VISIBLE);
             } else {
@@ -115,12 +118,44 @@ public class LanguageItem
         }
     }
 
-    @Deprecated
+
     public void setLanguageName(String languageName) {
 
+        ArrayAdapter<CharSequence> arrayAdapter_langs = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.langs,
+                android.R.layout.simple_spinner_item
+        );
+
+        for (int i = 0; i < arrayAdapter_langs.getCount(); i++) {
+            String currentLangName =((String) arrayAdapter_langs.getItem(i)).toLowerCase();
+
+            if (currentLangName.equals(languageName.toLowerCase())) {
+                spinner_language.setSelection(i);
+                return;
+            }
+        }
+
+        spinner_language.setSelection(OTHER_INDEX);
+        customLanguageName = languageName;
+        et_languageName.setText(languageName);
     }
 
     public String getLanguageName() {
+
+        ArrayAdapter<CharSequence> arrayAdapter_langs = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.langs,
+                android.R.layout.simple_spinner_item
+        );
+
+        for (int i = 0; i < arrayAdapter_langs.getCount(); i++) {
+            String currentLangName =((String) arrayAdapter_langs.getItem(i));
+
+            if (spinner_language.getSelectedItemPosition() == i) {
+                return currentLangName;
+            }
+        }
 
         return (String) spinner_language.getSelectedItem();
     }
@@ -140,7 +175,7 @@ public class LanguageItem
                 getSpeakingLevel(),
                 getReadingWritingLevel()
         );
-        language.setCustomLanguageName(customLanguageName);
+        if (!customLanguageName.isEmpty()) language.setCustomLanguageName(customLanguageName);
 
         return language;
     }
@@ -154,7 +189,7 @@ public class LanguageItem
         int selectedLanguage = OTHER_INDEX;
         String[] languages = getContext().getResources().getStringArray(R.array.langs);
 
-        if (language.getName() == null) {
+        if (language.getName() == null || language.getName().isEmpty()) {
             selectedLanguage = 0;
         }
 

@@ -27,6 +27,7 @@ public class BloodType {
         this.RH = RH;
     }
 
+
     @NonNull
     @Override
     public String toString() {

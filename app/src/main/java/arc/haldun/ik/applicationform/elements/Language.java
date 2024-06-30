@@ -117,20 +117,24 @@ public class Language {
 
         // Append language name
         stringBuilder
+                .append("\t")
                 .append("Dil: ")
                 .append(getName())
                 .append("\n");
 
         // Append speaking level
         stringBuilder
+                .append("\t")
                 .append("Konuşma Seviyesi: ")
                 .append(getSpeakingLevel().getString())
                 .append("\n");
 
         // Append reading/writing level
         stringBuilder
+                .append("\t")
                 .append("Okuma/Yazma Seviyesi: ")
-                .append(getReadingWritingLevel().getString());
+                .append(getReadingWritingLevel().getString())
+                .append("\n");
 
         return stringBuilder.toString();
     }

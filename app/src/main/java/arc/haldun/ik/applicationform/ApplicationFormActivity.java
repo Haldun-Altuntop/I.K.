@@ -52,7 +52,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         initOtherComponents();
 
         /**DEBUG*/
-        currentFragmentIndex = 5;
+        currentFragmentIndex = 3;
 
         // Set current fragment
         setCurrentFragmentIndex(currentFragmentIndex);
@@ -60,10 +60,16 @@ public class ApplicationFormActivity extends AppCompatActivity {
         /** DEBUG*/
         btnCommit.setOnLongClickListener(v -> {
 
+            StringBuilder information = new StringBuilder();
+
             try {
-                System.out.println(getCurrentFragment().collectInformationAsString());
+
+                for (Fragment fragment : fragments) {
+                    information.append(fragment.collectInformationAsString()).append("\n\n");
+                }
             } catch (MissingInformationException e) {
-                showMissingInformationDialog(e.getMissingFields());
+                //showMissingInformationDialog(e.getMissingFields());
+                e.printStackTrace();
             }
 
             return true;
@@ -253,13 +259,13 @@ public class ApplicationFormActivity extends AppCompatActivity {
     private void initOtherComponents() {
 
         fragments = new Fragment[] {
-                personalInfoFragment,
-                militaryFragment,
-                academicStateFragment,
-                languageFragment,
-                additionalInfoFragment,
-                experiencesFragment,
-                referencesFragment
+                personalInfoFragment, // 0
+                militaryFragment, // 1
+                academicStateFragment, // 2
+                languageFragment, // 3
+                additionalInfoFragment, // 4
+                experiencesFragment, // 5
+                referencesFragment // 6
         };
     }
 }
