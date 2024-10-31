@@ -63,6 +63,10 @@ public class AcademicStateFragment extends Fragment implements CompoundButton.On
 
     }
 
+    public AcademicStateFragment(FragmentType fragmentType) {
+        super(fragmentType);
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

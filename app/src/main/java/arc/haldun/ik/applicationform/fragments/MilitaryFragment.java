@@ -37,6 +37,10 @@ public class MilitaryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public MilitaryFragment(FragmentType fragmentType) {
+        super(fragmentType);
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

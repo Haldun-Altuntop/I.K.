@@ -17,6 +17,7 @@ import arc.haldun.ik.R;
 import arc.haldun.ik.applicationform.elements.Currency;
 import arc.haldun.ik.applicationform.elements.Residence;
 import arc.haldun.ik.applicationform.elements.SocialAssurance;
+import arc.haldun.ik.applicationform.info.AdditionalInfo;
 import arc.haldun.ik.exceptions.MissingInformationException;
 import arc.haldun.ik.utility.EditTextUtility;
 
@@ -44,6 +45,10 @@ public class AdditionalInfoFragment extends Fragment implements RadioGroup.OnChe
 
     public AdditionalInfoFragment() {
         // Required empty public constructor
+    }
+
+    public AdditionalInfoFragment(FragmentType fragmentType) {
+        super(fragmentType);
     }
 
     /**
@@ -108,8 +113,8 @@ public class AdditionalInfoFragment extends Fragment implements RadioGroup.OnChe
         radioGroup_socialAssurance.setOnCheckedChangeListener(this);
     }
 
-    private String currentResidence;
-    private String socialAssurance;
+    private Residence currentResidence;
+    private SocialAssurance socialAssurance;
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
@@ -128,7 +133,7 @@ public class AdditionalInfoFragment extends Fragment implements RadioGroup.OnChe
                 selectedIndex = -1;
             }
 
-            currentResidence = Residence.findById(selectedIndex).toString();
+            currentResidence = Residence.findById(selectedIndex);
 
         } else if (group.equals(radioGroup_socialAssurance)) {
 
@@ -145,9 +150,31 @@ public class AdditionalInfoFragment extends Fragment implements RadioGroup.OnChe
                 selectedIndex = -1;
             }
 
-            socialAssurance = SocialAssurance.findById(selectedIndex).toString();
+            socialAssurance = SocialAssurance.findById(selectedIndex);
 
         }
+    }
+
+    public AdditionalInfo getAdditionalInfo() throws MissingInformationException {
+
+        ArrayList<String> missingFields = new ArrayList<>();
+
+        String incomeAmount = EditTextUtility.getTextFromEditText(et_additionalMonthlyIncome);
+        Currency currency = Currency.findById(spinner_currency.getSelectedItemPosition());
+
+        // Check fields
+        if (incomeAmount.isEmpty()) missingFields.add("Aylık Gelir");
+        if (currentResidence == null) missingFields.add("Mevcut İkametgâh Yeri");
+        if (socialAssurance == null) missingFields.add("Sosya Güvence");
+
+        if (missingFields.size() > 0)
+            throw new MissingInformationException(missingFields.toArray(new String[0]));
+
+        return new AdditionalInfo(
+                incomeAmount,
+                currency,
+                currentResidence,
+                socialAssurance);
     }
 
     @Override

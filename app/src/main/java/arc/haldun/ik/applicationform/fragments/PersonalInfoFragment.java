@@ -45,6 +45,10 @@ public class PersonalInfoFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public PersonalInfoFragment(FragmentType fragmentType) {
+        super(fragmentType);
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

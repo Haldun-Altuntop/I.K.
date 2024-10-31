@@ -1,6 +1,9 @@
 package arc.haldun.ik.applicationform;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -8,14 +11,24 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import arc.haldun.ik.R;
+import arc.haldun.ik.applicationform.elements.Experience;
+import arc.haldun.ik.applicationform.elements.Language;
+import arc.haldun.ik.applicationform.elements.Reference;
 import arc.haldun.ik.applicationform.fragments.AcademicStateFragment;
 import arc.haldun.ik.applicationform.fragments.AdditionalInfoFragment;
 import arc.haldun.ik.applicationform.fragments.ExperiencesFragment;
 import arc.haldun.ik.applicationform.fragments.Fragment;
+import arc.haldun.ik.applicationform.fragments.FragmentType;
 import arc.haldun.ik.applicationform.fragments.LanguageFragment;
 import arc.haldun.ik.applicationform.fragments.MilitaryFragment;
 import arc.haldun.ik.applicationform.fragments.PersonalInfoFragment;
 import arc.haldun.ik.applicationform.fragments.ReferencesFragment;
+import arc.haldun.ik.applicationform.info.AdditionalInfo;
+import arc.haldun.ik.applicationform.info.MilitaryState;
+import arc.haldun.ik.applicationform.info.PersonalInformation;
+import arc.haldun.ik.applicationform.info.academicstate.AcademicState;
+import arc.haldun.ik.database.DatabaseManager;
+import arc.haldun.ik.database.mysql.MySqlDB;
 import arc.haldun.ik.exceptions.MissingInformationException;
 
 public class ApplicationFormActivity extends AppCompatActivity {
@@ -51,29 +64,9 @@ public class ApplicationFormActivity extends AppCompatActivity {
         // Initialize other components
         initOtherComponents();
 
-        /**DEBUG*/
-        currentFragmentIndex = 3;
-
         // Set current fragment
         setCurrentFragmentIndex(currentFragmentIndex);
 
-        /** DEBUG*/
-        btnCommit.setOnLongClickListener(v -> {
-
-            StringBuilder information = new StringBuilder();
-
-            try {
-
-                for (Fragment fragment : fragments) {
-                    information.append(fragment.collectInformationAsString()).append("\n\n");
-                }
-            } catch (MissingInformationException e) {
-                //showMissingInformationDialog(e.getMissingFields());
-                e.printStackTrace();
-            }
-
-            return true;
-        });
     }
 
     private void showMissingInformationDialog(String... missingFields) {
@@ -146,11 +139,51 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
         StringBuilder information = new StringBuilder();
 
+        AcademicState academicState = null;
+        AdditionalInfo additionalInfo = null;
+        Experience[] experiences = new Experience[0];
+        Language[] languages = new Language[0];
+        MilitaryState militaryState = null;
+        PersonalInformation personalInformation = null;
+        Reference[] references = new Reference[0];
+
         try {
 
             for (Fragment fragment : fragments) {
                 information.append(fragment.collectInformationAsString()).append("\n");
+
+                // Collect info
+                if (fragment.getFragmentType() == FragmentType.ACADEMIC_STATE) {
+                    academicState = ((AcademicStateFragment) fragment).getAcademicState();
+                } else if (fragment.getFragmentType() == FragmentType.MILITARY_STATE) {
+                    militaryState = ((MilitaryFragment) fragment).getMilitaryState();
+                } else if (fragment.getFragmentType() == FragmentType.ADDITIONAL_INFORMATION) {
+                    additionalInfo = ((AdditionalInfoFragment) fragment).getAdditionalInfo();
+                } else if (fragment.getFragmentType() == FragmentType.EXPERIENCES) {
+                    experiences = ((ExperiencesFragment) fragment).getExperiences();
+                } else if (fragment.getFragmentType() == FragmentType.LANGUAGE) {
+                    languages = ((LanguageFragment) fragment).getLanguages();
+                } else if (fragment.getFragmentType() == FragmentType.PERSONAL_INFORMATION) {
+                    personalInformation = ((PersonalInfoFragment) fragment).getPersonalInfo();
+                } else if (fragment.getFragmentType() == FragmentType.REFERENCES) {
+                    references = ((ReferencesFragment) fragment).getReferences();
+                }
             }
+
+            Application application = new Application(
+                    personalInformation,
+                    militaryState,
+                    academicState,
+                    languages,
+                    additionalInfo,
+                    experiences,
+                    references
+            );
+
+            commitApplication(application);
+
+            Log.i("Application Form", application.toString());
+
         } catch (MissingInformationException e) {
             showMissingInformationDialog(e.getMissingFields());
             e.printStackTrace();
@@ -188,6 +221,21 @@ public class ApplicationFormActivity extends AppCompatActivity {
         }
 
          */
+    }
+
+    private void commitApplication(Application application) {
+
+        HandlerThread commitThread = new HandlerThread("CommitApplicationThread");
+        commitThread.start();
+
+        Handler commitHandler = new Handler(commitThread.getLooper());
+        commitHandler.post(() -> {
+            DatabaseManager databaseManager = new DatabaseManager(new MySqlDB());
+            databaseManager.addApplication(application);
+        });
+
+        commitThread.quitSafely();
+
     }
 
     private void showMissingInformationDialog(String msg) {
@@ -234,13 +282,13 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
     private void initFragments() {
 
-        personalInfoFragment = new PersonalInfoFragment();
-        militaryFragment = new MilitaryFragment();
-        academicStateFragment = new AcademicStateFragment();
-        languageFragment = new LanguageFragment();
-        additionalInfoFragment = new AdditionalInfoFragment();
-        experiencesFragment = ExperiencesFragment.newInstance();
-        referencesFragment = ReferencesFragment.newInstance();
+        personalInfoFragment = new PersonalInfoFragment(FragmentType.PERSONAL_INFORMATION);
+        militaryFragment = new MilitaryFragment(FragmentType.MILITARY_STATE);
+        academicStateFragment = new AcademicStateFragment(FragmentType.ACADEMIC_STATE);
+        languageFragment = new LanguageFragment(FragmentType.LANGUAGE);
+        additionalInfoFragment = new AdditionalInfoFragment(FragmentType.ADDITIONAL_INFORMATION);
+        experiencesFragment = ExperiencesFragment.newInstance(FragmentType.EXPERIENCES);
+        referencesFragment = ReferencesFragment.newInstance(FragmentType.REFERENCES);
     }
 
     private void  initViews() {

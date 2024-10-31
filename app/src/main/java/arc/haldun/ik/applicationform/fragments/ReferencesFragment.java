@@ -26,8 +26,12 @@ public class ReferencesFragment extends Fragment implements View.OnClickListener
         // Required empty public constructor
     }
 
-    public static ReferencesFragment newInstance() {
-        return new ReferencesFragment();
+    public ReferencesFragment(FragmentType fragmentType) {
+        super(fragmentType);
+    }
+
+    public static ReferencesFragment newInstance(FragmentType fragmentType) {
+        return new ReferencesFragment(fragmentType);
     }
 
     @Override
@@ -81,6 +85,13 @@ public class ReferencesFragment extends Fragment implements View.OnClickListener
                 ((ReferencesAdapter.ReferenceHolder) viewHolder).prepareData();
             }
         }
+    }
+
+    public Reference[] getReferences() {
+
+        prepareData();
+
+        return referencesAdapter.getReferences();
     }
 
     @Override

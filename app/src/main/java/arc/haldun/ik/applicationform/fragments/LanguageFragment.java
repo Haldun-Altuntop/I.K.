@@ -39,6 +39,10 @@ public class LanguageFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public LanguageFragment(FragmentType fragmentType) {
+        super(fragmentType);
+    }
+
     public static LanguageFragment newInstance(String param1, String param2) {
         LanguageFragment fragment = new LanguageFragment();
         Bundle args = new Bundle();

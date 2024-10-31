@@ -30,8 +30,12 @@ public class ExperiencesFragment extends Fragment implements View.OnClickListene
         // Required empty public constructor
     }
 
-    public static ExperiencesFragment newInstance() {
-        return new ExperiencesFragment();
+    public ExperiencesFragment(FragmentType fragmentType) {
+        super(fragmentType);
+    }
+
+    public static ExperiencesFragment newInstance(FragmentType fragmentType) {
+        return new ExperiencesFragment(fragmentType);
     }
 
     @Override
@@ -60,6 +64,13 @@ public class ExperiencesFragment extends Fragment implements View.OnClickListene
                 ((ExperienceRecyclerAdapter.ExperienceHolder) viewHolder).prepareData();
             }
         }
+    }
+
+    public Experience[] getExperiences() {
+
+        prepareData();
+
+        return experiencesAdapter.getExperiences();
     }
 
     @Override

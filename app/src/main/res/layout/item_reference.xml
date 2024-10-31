@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:hint="Adı Soyadı"
             android:autofillHints=""
-            android:inputType="textPersonName" />
+            android:inputType="textCapWords" />
 
         <EditText
             android:id="@+id/item_reference_et_phone"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:hint="Telefon Numarası"
             android:autofillHints="phone"
-            android:inputType="textPersonName" />
+            android:inputType="phone" />
 
         <EditText
             android:id="@+id/item_reference_et_company"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:hint="Firma"
             android:autofillHints=""
-            android:inputType="textPersonName" />
+            android:inputType="textCapWords" />
 
         <EditText
             android:id="@+id/item_reference_et_job"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:hint="Meslek"
             android:autofillHints=""
-            android:inputType="textPersonName" />
+            android:inputType="textCapWords" />
 
         <EditText
             android:id="@+id/item_reference_et_relativity_degree"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:hint="Yakınlık Derecesi"
             android:autofillHints=""
-            android:inputType="textPersonName" />
+            android:inputType="textCapWords" />
 
     </LinearLayout>
 
