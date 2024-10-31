@@ -12,7 +12,7 @@
 * Database connection established.
 * Commit button commits applications to database now (_ApplicationActivity_)
 * Changed input type to _rextCapWords_ (_item\_reference_)
-
+* `libraries.jar` included to VCS.
 ***
 # 0.3.6
 * Fixed spelling mistake in `Experiences Fragment`
